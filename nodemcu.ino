@@ -6,8 +6,8 @@
 #define DHTTYPE DHT11
 
 
-const char* ssid = "Nagpal";
-const char* password = "Goria@2112";
+const char* ssid = "ssid";
+const char* password = "password";
 DHT dht (DHTPIN,DHTTYPE);
 void setup() {
   dht.begin();
@@ -26,7 +26,7 @@ void setup() {
   
 void loop() {
   
-  if ((WiFi.status() == WL_CONNECTED)) { //Check the current connection status
+  if ((WiFi.status() == WL_CONNECTED)) { 
     float t = dht.readTemperature();
 
   if (isnan(t)) {
@@ -36,7 +36,7 @@ void loop() {
     HTTPClient http;
   
     http.begin("https://script.google.com/macros/s/AKfycbx-9HfPxy0LpHln0A1epV13T3MTdhlvPund0hjIFo-LduddTSYo192ET3x5uoTztwIKkQ/exec?func=addData&val=" + String(t)); //Specify the URL
-    int httpCode = http.GET();                                        //Make the request
+    int httpCode = http.GET();                                    
   
     if (httpCode > 0) { //Check for the returning code
   
@@ -49,7 +49,7 @@ void loop() {
       Serial.println("Error on HTTP request");
     }
   
-    http.end(); //Free the resources
+    http.end();
   }
   
   delay(10000);
